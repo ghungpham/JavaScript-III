@@ -134,6 +134,61 @@ CharacterStats.prototype.takeDamage = function() {
 
 
   // Stretch task: 
-  // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
+  // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function. 
+  
+  function Villain(attrs) {
+    Humanoid.call(this, attrs);
+  }
+
+  Villain.prototype = Object.create(Humanoid.prototype);
+  Villain.prototype.berserk = function(opponent){
+      if (opponent.healthPoints >=3) {return `${this.name} drained three points from ${opponent.name}`} else {return `${this.name} has killed their opponent!`}
+        ;
+  };
+
+  function Hero1 (attrs) {
+    Humanoid.call (this, attrs);
+  }
+  Hero1.prototype = Object.create(Humanoid.prototype);
+  Hero1.prototype.berserk = function(opponent){
+      if (opponent.healthPoints >=3) {return `${this.name} drained three points from ${opponent.name}`} else {return `${this.name} has killed their opponent!!`}
+        ;
+  };
+
+  const avenger = new Hero1({
+    createdAt: new Date(),
+    dimensions: {
+      length: 2,
+      width: 2,
+      height: 2,
+    },
+    healthPoints: 15,
+    name: 'Sam',
+    team: 'The Round Table',
+    weapons: [
+      'Giant Sword',
+      'Shield',
+    ],
+    language: 'Elvish',
+  });
+  
+  const ghoul = new Villain({
+    createdAt: new Date(),
+    dimensions: {
+      length: 1,
+      width: 1,
+      height: 1,
+    },
+    healthPoints: 2,
+    name: 'Ghoulain',
+    team: 'Forest Swamp',
+    weapons: [
+      'Potion',
+    ],
+    language: `Dark Tongue`,
+  });
+
+  console.log(avenger.berserk(ghoul));
+  console.log(ghoul.berserk(avenger));
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
